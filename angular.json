@@ -1,0 +1,574 @@
+{
+	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+	"version": 1,
+	"cli": {
+		"packageManager": "npm"
+	},
+	"newProjectRoot": "projects",
+	"projects": {
+		"shell": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss"
+				}
+			},
+			"root": "projects/shell",
+			"sourceRoot": "projects/shell/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"outputPath": "dist/shell",
+						"index": "projects/shell/src/index.html",
+						"main": "projects/shell/src/main.ts",
+						"polyfills": [
+							"zone.js"
+						],
+						"tsConfig": "projects/shell/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/shell/src/favicon.ico",
+							"projects/shell/src/assets",
+							{
+								"glob": "**/*",
+								"input": "projects/config",
+								"output": "/assets/config"
+							}
+						],
+						"styles": [
+							"node_modules/@angular-architects/paper-design/assets/css/bootstrap.css",
+							"node_modules/@angular-architects/paper-design/assets/scss/paper-dashboard.scss",
+							"projects/shell/src/styles.scss"
+						],
+						"scripts": [],
+						"extraWebpackConfig": "projects/shell/webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kb",
+									"maximumError": "1mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "4kb"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/shell/webpack.prod.config.js"
+						},
+						"development": {
+							"buildOptimizer": false,
+							"optimization": false,
+							"vendorChunk": true,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"namedChunks": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"configurations": {
+						"production": {
+							"browserTarget": "shell:build:production",
+							"extraWebpackConfig": "projects/shell/webpack.prod.config.js"
+						},
+						"development": {
+							"browserTarget": "shell:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 4500,
+						"publicHost": "http://localhost:4500",
+						"extraWebpackConfig": "projects/shell/webpack.config.js"
+					}
+				},
+				"extract-i18n": {
+					"builder": "ngx-build-plus:extract-i18n",
+					"options": {
+						"browserTarget": "shell:build",
+						"extraWebpackConfig": "projects/shell/webpack.config.js"
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/shell/tsconfig.spec.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/shell/src/favicon.ico",
+							"projects/shell/src/assets"
+						],
+						"styles": [
+							"projects/shell/src/styles.scss"
+						],
+						"scripts": []
+					}
+				}
+			}
+		},
+		"feature-flight-search": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss"
+				}
+			},
+			"root": "projects/plugins/feature-flight-search",
+			"sourceRoot": "projects/plugins/feature-flight-search/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"outputPath": "dist/feature-flight-search",
+						"index": "",
+						"main": "projects/plugins/feature-flight-search/src/main.ts",
+						"tsConfig": "projects/plugins/feature-flight-search/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"extraWebpackConfig": "projects/plugins/feature-flight-search/webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kb",
+									"maximumError": "1mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "4kb"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/plugins/feature-flight-search/webpack.prod.config.js"
+						},
+						"development": {
+							"buildOptimizer": false,
+							"optimization": false,
+							"vendorChunk": true,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"namedChunks": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"configurations": {
+						"production": {
+							"browserTarget": "feature-flight-search:build:production",
+							"extraWebpackConfig": "projects/plugins/feature-flight-search/webpack.prod.config.js"
+						},
+						"development": {
+							"browserTarget": "feature-flight-search:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 4510,
+						"publicHost": "http://localhost:4510",
+						"extraWebpackConfig": "projects/plugins/feature-flight-search/webpack.config.js"
+					}
+				},
+				"extract-i18n": {
+					"builder": "ngx-build-plus:extract-i18n",
+					"options": {
+						"browserTarget": "feature-flight-search:build",
+						"extraWebpackConfig": "projects/plugins/feature-flight-search/webpack.config.js"
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/plugins/feature-flight-search/tsconfig.spec.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/plugins/feature-flight-search/src/favicon.ico",
+							"projects/plugins/feature-flight-search/src/assets"
+						],
+						"styles": [
+							"projects/plugins/feature-flight-search/src/styles.scss"
+						],
+						"scripts": []
+					}
+				}
+			}
+		},
+		"fn-validate-passenger-status": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss"
+				}
+			},
+			"root": "projects/plugins/fn-validate-passenger-status",
+			"sourceRoot": "projects/plugins/fn-validate-passenger-status/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"outputPath": "dist/fn-validate-passenger-status",
+						"index": "",
+						"main": "projects/plugins/fn-validate-passenger-status/src/main.ts",
+						"tsConfig": "projects/plugins/fn-validate-passenger-status/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"extraWebpackConfig": "projects/plugins/fn-validate-passenger-status/webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kb",
+									"maximumError": "1mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "4kb"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/plugins/fn-validate-passenger-status/webpack.prod.config.js"
+						},
+						"development": {
+							"buildOptimizer": false,
+							"optimization": false,
+							"vendorChunk": true,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"namedChunks": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"configurations": {
+						"production": {
+							"browserTarget": "fn-validate-passenger-status:build:production",
+							"extraWebpackConfig": "projects/plugins/fn-validate-passenger-status/webpack.prod.config.js"
+						},
+						"development": {
+							"browserTarget": "fn-validate-passenger-status:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 4540,
+						"publicHost": "http://localhost:4540",
+						"extraWebpackConfig": "projects/plugins/fn-validate-passenger-status/webpack.config.js"
+					}
+				},
+				"extract-i18n": {
+					"builder": "ngx-build-plus:extract-i18n",
+					"options": {
+						"browserTarget": "fn-validate-passenger-status:build",
+						"extraWebpackConfig": "projects/plugins/fn-validate-passenger-status/webpack.config.js"
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/plugins/fn-validate-passenger-status/tsconfig.spec.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/plugins/fn-validate-passenger-status/src/favicon.ico",
+							"projects/plugins/fn-validate-passenger-status/src/assets"
+						],
+						"styles": [
+							"projects/plugins/fn-validate-passenger-status/src/styles.scss"
+						],
+						"scripts": []
+					}
+				}
+			}
+		},
+		"mfe-ticket": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss"
+				}
+			},
+			"root": "projects/plugins/mfe-ticket",
+			"sourceRoot": "projects/plugins/mfe-ticket/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"outputPath": "dist/mfe-ticket",
+						"index": "",
+						"main": "projects/plugins/mfe-ticket/src/main.ts",
+						"tsConfig": "projects/plugins/mfe-ticket/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"extraWebpackConfig": "projects/plugins/mfe-ticket/webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kb",
+									"maximumError": "1mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "4kb"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/plugins/mfe-ticket/webpack.prod.config.js"
+						},
+						"development": {
+							"buildOptimizer": false,
+							"optimization": false,
+							"vendorChunk": true,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"namedChunks": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"configurations": {
+						"production": {
+							"browserTarget": "mfe-ticket:build:production",
+							"extraWebpackConfig": "projects/plugins/mfe-ticket/webpack.prod.config.js"
+						},
+						"development": {
+							"browserTarget": "mfe-ticket:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 4520,
+						"publicHost": "http://localhost:4520",
+						"extraWebpackConfig": "projects/plugins/mfe-ticket/webpack.config.js"
+					}
+				},
+				"extract-i18n": {
+					"builder": "ngx-build-plus:extract-i18n",
+					"options": {
+						"browserTarget": "mfe-ticket:build",
+						"extraWebpackConfig": "projects/plugins/mfe-ticket/webpack.config.js"
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/plugins/mfe-ticket/tsconfig.spec.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/plugins/mfe-ticket/src/favicon.ico",
+							"projects/plugins/mfe-ticket/src/assets"
+						],
+						"styles": [
+							"projects/plugins/mfe-ticket/src/styles.scss"
+						],
+						"scripts": []
+					}
+				}
+			}
+		},
+		"service-flight": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss"
+				}
+			},
+			"root": "projects/plugins/service-flight",
+			"sourceRoot": "projects/plugins/service-flight/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"outputPath": "dist/service-flight",
+						"index": "",
+						"main": "projects/plugins/service-flight/src/main.ts",
+						"tsConfig": "projects/plugins/service-flight/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"extraWebpackConfig": "projects/plugins/service-flight/webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kb",
+									"maximumError": "1mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "4kb"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/plugins/service-flight/webpack.prod.config.js"
+						},
+						"development": {
+							"buildOptimizer": false,
+							"optimization": false,
+							"vendorChunk": true,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"namedChunks": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"configurations": {
+						"production": {
+							"browserTarget": "service-flight:build:production",
+							"extraWebpackConfig": "projects/plugins/service-flight/webpack.prod.config.js"
+						},
+						"development": {
+							"browserTarget": "service-flight:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 4530,
+						"publicHost": "http://localhost:4530",
+						"extraWebpackConfig": "projects/plugins/service-flight/webpack.config.js"
+					}
+				},
+				"extract-i18n": {
+					"builder": "ngx-build-plus:extract-i18n",
+					"options": {
+						"browserTarget": "service-flight:build",
+						"extraWebpackConfig": "projects/plugins/service-flight/webpack.config.js"
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/plugins/service-flight/tsconfig.spec.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/plugins/service-flight/src/favicon.ico",
+							"projects/plugins/service-flight/src/assets"
+						],
+						"styles": [
+							"projects/plugins/service-flight/src/styles.scss"
+						],
+						"scripts": []
+					}
+				}
+			}
+		},
+		"logic-flight": {
+			"projectType": "library",
+			"root": "projects/libs/logic-flight",
+			"sourceRoot": "projects/libs/logic-flight/src",
+			"prefix": "lib",
+			"architect": {
+				"build": {
+					"builder": "@angular-devkit/build-angular:ng-packagr",
+					"options": {
+						"project": "projects/libs/logic-flight/ng-package.json"
+					},
+					"configurations": {
+						"production": {
+							"tsConfig": "projects/libs/logic-flight/tsconfig.lib.prod.json"
+						},
+						"development": {
+							"tsConfig": "projects/libs/logic-flight/tsconfig.lib.json"
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"tsConfig": "projects/libs/logic-flight/tsconfig.spec.json",
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						]
+					}
+				}
+			}
+		},
+		"shared-customizing": {
+			"projectType": "library",
+			"root": "projects/libs/shared-customizing",
+			"sourceRoot": "projects/libs/shared-customizing/src",
+			"prefix": "lib",
+			"architect": {
+				"build": {
+					"builder": "@angular-devkit/build-angular:ng-packagr",
+					"options": {
+						"project": "projects/libs/shared-customizing/ng-package.json"
+					},
+					"configurations": {
+						"production": {
+							"tsConfig": "projects/libs/shared-customizing/tsconfig.lib.prod.json"
+						},
+						"development": {
+							"tsConfig": "projects/libs/shared-customizing/tsconfig.lib.json"
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"tsConfig": "projects/libs/shared-customizing/tsconfig.spec.json",
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						]
+					}
+				}
+			}
+		}
+	}
+}
