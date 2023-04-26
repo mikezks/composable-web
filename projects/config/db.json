@@ -45,7 +45,7 @@
       "id": 2,
       "category": "routes",
       "scope": "booking/flight",
-      "name": "search",
+      "path": "search",
       "type": "component",
       "source": [
         "feature-flight-search"
